@@ -6,11 +6,7 @@
  *
  */
 define("Util", [
-    'Config',
-    'jmd5',
-    'plugins/ext.util/jquery.json-2.4',
-    'plugins/ext.util/dropdown',
-    'plugins/ext.util/bootstrap-datepicker'
+    'Config'
 ], function(Config) {    
     // Using ECMAScript 5 strict mode during development. By default r.js will ignore that.
     "use strict";
