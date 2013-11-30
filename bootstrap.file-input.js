@@ -70,9 +70,9 @@ define([
 
                 //The positions we are to move the invisible file input
                 // The 20 at the end is an arbitrary number of pixels that we can shift the input such that cursor is not pointing at the end of the Browse button but somewhere nearer the middle
-                moveInputX = cursorX - wrapperX - inputWidth + 20;
+                var moveInputX = cursorX - wrapperX - inputWidth + 20;
                 // Slides the invisible input Browse button to be positioned middle under the cursor
-                moveInputY = cursorY - wrapperY - (inputHeight / 2);
+                var moveInputY = cursorY - wrapperY - (inputHeight / 2);
 
                 // Apply the positioning styles to actually move the invisible file input
                 input.css({
