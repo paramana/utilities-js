@@ -12,6 +12,11 @@ define("Util", [
     "use strict";
     
     return {
+        setCursorAtTheEnd: function($input){
+            var len = $input.val().length;
+            $input[0].focus();
+            $input[0].setSelectionRange(len, len);
+        },
         /*
          * Checks is an input field is truly empty
          * 
@@ -327,6 +332,6 @@ define("Util", [
          */
         delcookie: function (name, domain){
             document.cookie = name + "=blah; expires=Fri, 31 Dec 1999 23:59:59 GMT;" + (domain ? 'domain='+domain : '');
-        },
+        }
     };
 });
