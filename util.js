@@ -12,10 +12,16 @@ define("Util", [
     "use strict";
     
     return {
-        setCursorAtTheEnd: function($input){
-            var len = $input.val().length;
-            $input[0].focus();
-            $input[0].setSelectionRange(len, len);
+        putCursorAtTheEnd: function($input){
+            $input.focus();
+
+            if ($input[0].setSelectionRange) {
+                var len = $input.val().length;
+                $input[0].setSelectionRange(len, len);
+            } 
+            else {
+              $input.val($input.val());
+            }
         },
         /*
          * Checks is an input field is truly empty
