@@ -203,24 +203,34 @@ define("Util", [
             return Object.keys(obj).length;
         },
                 
-        queryParams: function(str){
-            if (!str)
-                return '';
-            
-            var query = str.replace(/^\?/, '').split('&'),
-                params = {},
-                ql = query.length;
-            
-            if (!ql)
-                return '';
-            
-            for(var i = 0; i < ql; i++) {
-                query[i] = query[i].split('=');
-                params[query[i][0]] = query[i][1]
+        queryParams: function(query){
+            var decodeParam = function(str) {
+                return decodeURIComponent(str.replace(/\+/g, ' '));
+            };
+            var re = /([^&=]+)=?([^&]*)/g;
+            var params = {}, e;
+            if (query) {
+                if (query.substr(0, 1) == '?') {
+                    query = query.substr(1);
+                }
+
+                while (e = re.exec(query)) {
+                    var k = decodeParam(e[1]);
+                    var v = decodeParam(e[2]);
+                    if (params[k] !== undefined) {
+                        if (!$.isArray(params[k])) {
+                            params[k] = [params[k]];
+                        }
+                        params[k].push(v);
+                    } 
+                    else {
+                        params[k] = v;
+                    }
+                }
             }
-            
             return params;
         },
+
         padDate: function(date){
             if (!date)
                 return date;
