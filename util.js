@@ -1,7 +1,7 @@
 /*!
  * Version: 1.0
  * Started: 30-04-2013
- * Updated: 22-07-2013
+ * Updated: 28-12-2013
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -269,6 +269,41 @@ define("Util", [
             
             return false;
         },
+        formatDate: function(date, format, language){
+            function parseFormat(format){
+                // IE treats \0 as a string end in inputs (truncating the value),
+                // so it's a bad format delimiter, anyway
+                var separators = format.replace(validParts, '\0').split('\0'),
+                    parts = format.match(validParts);
+                if (!separators || !separators.length || !parts || parts.length === 0){
+                    throw new Error("Invalid date format.");
+                }
+                return {separators: separators, parts: parts};
+            };
+            var validParts = /dd?|DD?|mm?|MM?|yy(?:yy)?/g;
+			var val = {
+				d: date.getUTCDate(),
+				D: language.daysShort[date.getUTCDay()],
+				DD: language.days[date.getUTCDay()],
+				m: date.getUTCMonth() + 1,
+				M: language.monthsShort[date.getUTCMonth()],
+				MM: language.months[date.getUTCMonth()],
+				yy: date.getUTCFullYear().toString().substring(2),
+				yyyy: date.getUTCFullYear()
+			};
+			val.dd = (val.d < 10 ? '0' : '') + val.d;
+			val.mm = (val.m < 10 ? '0' : '') + val.m;
+            format = parseFormat(format);
+			var date = [],
+				seps = $.extend([], format.separators);
+			for (var i=0, cnt = format.parts.length; i < cnt; i++) {
+				if (seps.length)
+					date.push(seps.shift());
+				date.push(val[format.parts[i]]);
+			}
+			return date.join('');
+		},
+        
         /**
          * Determines whether a value should be considered false. This excludes, amongst
          * others, the number 0.
