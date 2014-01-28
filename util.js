@@ -1,7 +1,7 @@
 /*!
  * Version: 1.0
  * Started: 30-04-2013
- * Updated: 28-12-2013
+ * Updated: 28-01-2014
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -230,7 +230,15 @@ define("Util", [
             }
             return params;
         },
+        arrayToObject: function (array) {
+            var obj    = [],
+                _index = 1;
+            for (var i = 0; i < array.length; i++) {
+                obj.push({'index': _index++, 'value': array[i]});
+            }
 
+            return obj;
+        },
         padDate: function(date){
             if (!date)
                 return date;
