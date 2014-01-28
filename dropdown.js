@@ -84,9 +84,10 @@ define([
     Dropdown.prototype.events = function() {
         var _self = this;
 
-        this.$select.change(function(e) {
-            _self.setValue();
-        }).on({
+        this.$select.on({
+            change: function(){
+                _self.setValue();
+            },
             click: function(e) {
                 if (!_self.enabled)
                     return false;
