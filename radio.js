@@ -98,8 +98,10 @@ define([
         
         this.$element.on({
            click: function(){
-               $(this).find('input').prop('checked', 'checked');
-               _self.toggleCheck();
+               $(this)
+                       .find('input')
+                       .prop('checked', 'checked')
+                       .trigger('change');
            } 
         });
     };
