@@ -46,19 +46,19 @@ define([
 
     Dropdown.prototype.init = function() {
         this.$element.addClass('dropdown-element');
-        
-        if (this.options.value)
-            this.setValue(this.options.value);
-        
-        var $selected = this.$select.find('option[selected="selected"]');
-        if ($selected.length)
-            this.setValue($selected.prop('value'));
-        
         this.events();
+
+        var $selected;
+        if (this.options.value)
+            $selected = this.$select.find('option[value="' + this.options.value + '"]').attr('selected', 'selected');
+        else
+            $selected = this.$select.find('option[selected="selected"]');
+
+        if ($selected.length)
+            this.$select.val($selected.prop('value')).trigger('change');
     };
     
     Dropdown.prototype.setValue = function(value) {
-
         if (!this.enabled)
             return false;
             
@@ -75,6 +75,9 @@ define([
                 .attr('data-value', _value);
 
         this.$text.text($option.text());
+
+        if (_value)
+            this.$select.data('text', $option.text());
         
         if (value == null) {
             this.options.onchange.call(this.options.rel, _value);

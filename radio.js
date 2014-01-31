@@ -1,7 +1,7 @@
 /*!
  * Version: 1.0
- * Started: 11-06-2013
- * Updated: 11-06-2013
+ * Started: 28-01-2014
+ * Updated: 31-01-2014
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -46,28 +46,48 @@ define([
 
     RadioBtn.prototype.init = function() {
         this.$element.addClass('radio-element');
-        
+
+        var dataValue = this.$element.attr('data-value'),
+            _value    = this.$radio.val();
+
+        if (dataValue && dataValue == _value) {
+            this.$radio.attr('checked', 'checked');
+        }
+
         this.toggleCheck();
         this.events();
+
+        if (dataValue && dataValue == _value) {
+            this.$radio.trigger('change');
+        }
     };
     
     RadioBtn.prototype.toggleCheck = function() {
         if (!this.enabled)
             return false;
-            
+
         var checked   = this.$radio.is(':checked'),
             $gChecked = [];
     
         if (checked) {
+            var _value = this.$radio.val();
+
             $gChecked = this.$inputs.filter('.checked');
             
             $gChecked
                     .removeClass(this.options.checkedClass)
+                    .data('text', '')
                     .closest('.radio-element')
-                    .removeClass(this.options.checkedClass);;
+                    .attr('data-value', _value)
+                    .removeClass(this.options.checkedClass);
             
-            this.$radio.addClass(this.options.checkedClass);
-            this.$element.addClass(this.options.checkedClass);
+            this.$radio
+                    .addClass(this.options.checkedClass)
+                    .data('text', this.$element.find('.radio-text:eq(0)').text());
+
+            this.$element
+                    .addClass(this.options.checkedClass)
+                    .attr('data-value', _value);
         }
         else {
             this.$radio.removeClass(this.options.checkedClass);
