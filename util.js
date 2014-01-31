@@ -1,7 +1,7 @@
 /*!
  * Version: 1.0
  * Started: 30-04-2013
- * Updated: 28-01-2014
+ * Updated: 31-01-2014
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -230,11 +230,13 @@ define("Util", [
             }
             return params;
         },
-        arrayToObject: function (array) {
+        arrayToObject: function (array, pad) {
             var obj    = [],
                 _index = 1;
+
             for (var i = 0; i < array.length; i++) {
-                obj.push({'index': _index++, 'value': array[i]});
+                obj.push({'index': !pad ? index : this.padDate(_index), 'value': array[i]});
+                _index++;
             }
 
             return obj;
@@ -253,7 +255,7 @@ define("Util", [
             var t = date.split(/[- :]/);
 
             // Apply each element to the Date function
-            return new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
+            return new Date(t[0], t[1]-1, t[2], t[3] || '', t[4] || '', t[5] || '');
         },
         dateSQLToEu: function(date){
             if (!date)
@@ -271,6 +273,14 @@ define("Util", [
                 return {day:'', month:'', year:''};
             
             return {day: str[1], month: str[2], year: str[3]};
+        },
+        getAge: function (d1, d2){
+            if (typeof d1 == 'string')
+                d1 = new Date(d1);
+
+            d2 = d2 || new Date();
+            var diff = d2.getTime() - d1.getTime();
+            return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
         },
         isItNow: function(date){
             date = date + '';
@@ -309,28 +319,28 @@ define("Util", [
                 return {separators: separators, parts: parts};
             };
             var validParts = /dd?|DD?|mm?|MM?|yy(?:yy)?/g;
-			var val = {
-				d: date.getUTCDate(),
-				D: language.daysShort[date.getUTCDay()],
-				DD: language.days[date.getUTCDay()],
-				m: date.getUTCMonth() + 1,
-				M: language.monthsShort[date.getUTCMonth()],
-				MM: language.months[date.getUTCMonth()],
-				yy: date.getUTCFullYear().toString().substring(2),
-				yyyy: date.getUTCFullYear()
-			};
-			val.dd = (val.d < 10 ? '0' : '') + val.d;
-			val.mm = (val.m < 10 ? '0' : '') + val.m;
+            var val = {
+                d: date.getUTCDate(),
+                D: language.daysShort[date.getUTCDay()],
+                DD: language.days[date.getUTCDay()],
+                m: date.getUTCMonth() + 1,
+                M: language.monthsShort[date.getUTCMonth()],
+                MM: language.months[date.getUTCMonth()],
+                yy: date.getUTCFullYear().toString().substring(2),
+                yyyy: date.getUTCFullYear()
+            };
+            val.dd = (val.d < 10 ? '0' : '') + val.d;
+            val.mm = (val.m < 10 ? '0' : '') + val.m;
             format = parseFormat(format);
-			var date = [],
-				seps = $.extend([], format.separators);
-			for (var i=0, cnt = format.parts.length; i < cnt; i++) {
-				if (seps.length)
-					date.push(seps.shift());
-				date.push(val[format.parts[i]]);
-			}
-			return date.join('');
-		},
+            var date = [],
+                seps = $.extend([], format.separators);
+            for (var i=0, cnt = format.parts.length; i < cnt; i++) {
+                if (seps.length)
+                    date.push(seps.shift());
+                date.push(val[format.parts[i]]);
+            }
+            return date.join('');
+        },
         
         /**
          * Determines whether a value should be considered false. This excludes, amongst

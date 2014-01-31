@@ -1,7 +1,7 @@
 /*!
  * Version: 1.0
  * Started: 11-06-2013
- * Updated: 11-06-2013
+ * Updated: 31-01-2014
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -58,6 +58,7 @@ define([
     };
     
     Dropdown.prototype.setValue = function(value) {
+
         if (!this.enabled)
             return false;
             
@@ -69,7 +70,10 @@ define([
             $option = this.$select.find('option:eq(0)');
         }
         
-        this.$element.removeClass(this.activeSelect + ' ' + this.error);
+        this.$element
+                .removeClass(this.activeSelect + ' ' + this.error)
+                .attr('data-value', _value);
+
         this.$text.text($option.text());
         
         if (value == null) {
