@@ -15,6 +15,7 @@ define([
     // Create the defaults once
     var pluginName = "radio",
         defaults   = {
+            activeClass: "active",
             checkedClass:  "checked",
             rel: this,
             onchange: function(){}
@@ -113,6 +114,18 @@ define([
                     return false;
                 
                 _self.toggleCheck();
+            },
+            focus: function(event) {
+                if (!_self.enabled)
+                    return false;
+                
+                _self.$element.addClass(_self.options.activeClass);
+            },
+            blur: function(event) {
+                if (!_self.enabled)
+                    return false;
+                
+                _self.$element.removeClass(_self.options.activeClass);
             }
         });
         

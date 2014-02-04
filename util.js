@@ -245,7 +245,7 @@ define("Util", [
             if (!date)
                 return date;
             
-            return ('0' + (date + 1)).slice(-2);
+            return ('0' + date).slice(-2);
         },
         dateSQLToJS: function(date){
             if (!date)
@@ -319,28 +319,28 @@ define("Util", [
                 return {separators: separators, parts: parts};
             };
             var validParts = /dd?|DD?|mm?|MM?|yy(?:yy)?/g;
-            var val = {
-                d: date.getUTCDate(),
-                D: language.daysShort[date.getUTCDay()],
-                DD: language.days[date.getUTCDay()],
-                m: date.getUTCMonth() + 1,
-                M: language.monthsShort[date.getUTCMonth()],
-                MM: language.months[date.getUTCMonth()],
-                yy: date.getUTCFullYear().toString().substring(2),
-                yyyy: date.getUTCFullYear()
-            };
-            val.dd = (val.d < 10 ? '0' : '') + val.d;
-            val.mm = (val.m < 10 ? '0' : '') + val.m;
+			var val = {
+				d: date.getUTCDate(),
+				D: language.daysShort[date.getUTCDay()],
+				DD: language.days[date.getUTCDay()],
+				m: date.getUTCMonth() + 1,
+				M: language.monthsShort[date.getUTCMonth()],
+				MM: language.months[date.getUTCMonth()],
+				yy: date.getUTCFullYear().toString().substring(2),
+				yyyy: date.getUTCFullYear()
+			};
+			val.dd = (val.d < 10 ? '0' : '') + val.d;
+			val.mm = (val.m < 10 ? '0' : '') + val.m;
             format = parseFormat(format);
-            var date = [],
-                seps = $.extend([], format.separators);
-            for (var i=0, cnt = format.parts.length; i < cnt; i++) {
-                if (seps.length)
-                    date.push(seps.shift());
-                date.push(val[format.parts[i]]);
-            }
-            return date.join('');
-        },
+			var date = [],
+				seps = $.extend([], format.separators);
+			for (var i=0, cnt = format.parts.length; i < cnt; i++) {
+				if (seps.length)
+					date.push(seps.shift());
+				date.push(val[format.parts[i]]);
+			}
+			return date.join('');
+		},
         
         /**
          * Determines whether a value should be considered false. This excludes, amongst

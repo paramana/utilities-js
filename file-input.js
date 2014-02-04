@@ -4,7 +4,7 @@ define([
     // Using ECMAScript 5 strict mode during development. By default r.js will ignore that.
     "use strict";
     
-    return function () {
+    function init() {
         $('input[type=file].file-input').each(function(i, elem) {
             var $this      = $(this),
                 buttonWord = 'Browse';
@@ -37,5 +37,9 @@ define([
                 }
             });
         });
+    }
+
+    return {
+        init: init
     };
 });
