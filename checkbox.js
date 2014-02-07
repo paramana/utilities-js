@@ -1,7 +1,7 @@
 /*!
  * Version: 1.0
- * Started: 28-01-2014
- * Updated: 31-01-2014
+ * Started: 07-02-2014
+ * Updated: 07-02-2014
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -13,7 +13,7 @@ define([
     "use strict";
 
     // Create the defaults once
-    var pluginName = "radio",
+    var pluginName = "checkbox",
         defaults   = {
             activeClass: "active",
             checkedClass:  "checked",
@@ -22,10 +22,10 @@ define([
         };
 
     // The actual plugin constructordropdown-element
-    function RadioBtn(element, options) {
+    function CheckboxBtn(element, options) {
         this.element = element;
         this.$element = $(element);
-        this.$radio = this.$element.find('input:radio');
+        this.$checkbox = this.$element.find('input:checkbox');
         this.enabled = true;
         
         // jQuery has an extend method that merges the 
@@ -36,7 +36,7 @@ define([
         this.options = $.extend({}, defaults, options);
         
         this.context = this.options.rel;
-        this.$inputs = this.context.find('input[name="' + this.$radio.attr('name') + '"]');
+        this.$inputs = this.context.find('input[name="' + this.$checkbox.attr('name') + '"]');
         
         this._defaults = defaults;
         this._name = pluginName;
@@ -44,61 +44,51 @@ define([
         this.init();
     }
 
-    RadioBtn.prototype.init = function() {
-        this.$element.addClass('radio-element');
+    CheckboxBtn.prototype.init = function() {
+        this.$element.addClass('checkbox-element');
 
         var dataValue = this.$element.attr('data-value'),
-            _value    = this.$radio.val();
+            _value    = this.$checkbox.val();
 
         if (dataValue && dataValue == _value) {
-            this.$radio.attr('checked', 'checked');
+            this.$checkbox.attr('checked', 'checked');
         }
 
         this.toggleCheck();
         this.events();
 
         if (dataValue && dataValue == _value) {
-            this.$radio.trigger('change');
+            this.$checkbox.trigger('change');
         }
     };
     
-    RadioBtn.prototype.toggleCheck = function() {
+    CheckboxBtn.prototype.toggleCheck = function() {
         if (!this.enabled)
             return false;
 
-        var checked   = this.$radio.is(':checked'),
-            $gChecked = [];
+        var checked = this.$checkbox.is(':checked');
     
         if (checked) {
-            var _value = this.$radio.val();
+            var _value = this.$checkbox.val();
 
-            $gChecked = this.$inputs.filter('.checked');
-            
-            $gChecked
-                    .removeClass(this.options.checkedClass)
-                    .data('text', '')
-                    .closest('.radio-element')
-                    .attr('data-value', _value)
-                    .removeClass(this.options.checkedClass);
-            
-            this.$radio
+            this.$checkbox
                     .addClass(this.options.checkedClass)
-                    .data('text', this.$element.find('.radio-text:eq(0)').text());
+                    .data('text', this.$element.find('.checkbox-text:eq(0)').text());
 
             this.$element
                     .addClass(this.options.checkedClass)
                     .attr('data-value', _value);
         }
         else {
-            this.$radio.removeClass(this.options.checkedClass);
+            this.$checkbox.removeClass(this.options.checkedClass);
             this.$element.removeClass(this.options.checkedClass);
         }
     };
 
-    RadioBtn.prototype.events = function() {
+    CheckboxBtn.prototype.events = function() {
         var _self = this;
 
-        this.$radio.on({
+        this.$checkbox.on({
             change: function(e) {
                 _self.toggleCheck();
             },
@@ -131,22 +121,22 @@ define([
         this.$element.on({
            click: function(){
                $(this)
-                       .find('input:radio')
+                       .find('input:checkbox')
                        .prop('checked', 'checked')
                        .trigger('change');
            } 
         });
     };
     
-    RadioBtn.prototype.enable = function() {
+    CheckboxBtn.prototype.enable = function() {
         this.$element.removeClass('disabled');
-        this.$radio.removeAttr('disabled');
+        this.$checkbox.removeAttr('disabled');
         this.enabled = true;
     };
     
-    RadioBtn.prototype.disable = function() {
+    CheckboxBtn.prototype.disable = function() {
         this.$element.addClass('disabled');
-        this.$radio.attr('disabled', 'disabled');
+        this.$checkbox.attr('disabled', 'disabled');
         this.enabled = false;
     };
     
@@ -157,7 +147,7 @@ define([
         return this.each(function() {
             if (!$.data(this, "plugin_" + pluginName)) {
                 $.data(this, "plugin_" + pluginName,
-                        new RadioBtn(this, options));
+                        new CheckboxBtn(this, options));
             }
         });
     };
