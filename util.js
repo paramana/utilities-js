@@ -1,7 +1,7 @@
 /*!
  * Version: 1.0
  * Started: 30-04-2013
- * Updated: 14-02-2014
+ * Updated: 16-02-2014
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -274,20 +274,36 @@ define("Util", [
             
             return {day: str[1], month: str[2], year: str[3]};
         },
-        getAge: function (d1, d2, days){
+        getAge: function (d1, d2, days, language){
             if (typeof d1 == 'string')
                 d1 = new Date(d1);
 
             d2 = d2 || new Date();
-            var diff = d2.getTime() - d1.getTime();
-            var divider = 1000 * 60 * 60 * 24;
+            var diff    = d2.getTime() - d1.getTime(),
+                divider = 1000 * 60 * 60 * 24,
+                age     = '';
+
             if (!days)
                 divider = divider * 365.25;
 
             if (!diff)
-                return '';
+                return age;
 
-            return Math.floor(Math.abs(diff / divider));
+            age = diff / divider;
+
+            if (days) {
+                if (age > 0 && age < 1) {
+                    return language.today;
+                }
+                else if (language.tomorrow && age < 0 && age > -1) {
+                    return language.tomorrow;
+                }
+                else if (language.yesterday && age > 1 && age < 2) {
+                    return language.yesterday;
+                }
+            }
+
+            return Math.ceil(Math.abs(age));
         },
         isItNow: function(date){
             date = date + '';
@@ -324,7 +340,8 @@ define("Util", [
                     throw new Error("Invalid date format.");
                 }
                 return {separators: separators, parts: parts};
-            };
+            }
+
             var validParts = /dd?|DD?|mm?|MM?|yy(?:yy)?/g;
             var val = {
                 d: date.getUTCDate(),
@@ -336,17 +353,22 @@ define("Util", [
                 yy: date.getUTCFullYear().toString().substring(2),
                 yyyy: date.getUTCFullYear()
             };
+
             val.dd = (val.d < 10 ? '0' : '') + val.d;
             val.mm = (val.m < 10 ? '0' : '') + val.m;
             format = parseFormat(format);
-            var date = [],
-                seps = $.extend([], format.separators);
+
+            var newDate = [],
+                seps    = $.extend([], format.separators);
+
             for (var i=0, cnt = format.parts.length; i < cnt; i++) {
                 if (seps.length)
-                    date.push(seps.shift());
-                date.push(val[format.parts[i]]);
+                    newDate.push(seps.shift());
+
+                newDate.push(val[format.parts[i]]);
             }
-            return date.join('');
+
+            return newDate.join('');
         },
         
         /**
