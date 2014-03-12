@@ -23,10 +23,11 @@ define([
 
     // The actual plugin constructordropdown-element
     function CheckboxBtn(element, options) {
-        this.element = element;
-        this.$element = $(element);
-        this.$checkbox = this.$element.find('input:checkbox');
-        this.enabled = true;
+        this.element       = element;
+        this.$element      = $(element);
+        this.$checkbox     = this.$element.find('input:checkbox');
+        this.originalValue = this.$checkbox.val();
+        this.enabled       = true;
         
         // jQuery has an extend method that merges the 
         // contents of two or more objects, storing the 
@@ -66,12 +67,13 @@ define([
         if (!this.enabled)
             return false;
 
-        var checked = this.$checkbox.is(':checked');
-    
+        var checked = this.$checkbox.is(':checked'),
+            _value  = this.originalValue;
+
         if (checked) {
-            var _value = this.$checkbox.val();
 
             this.$checkbox
+                    .val(_value)
                     .addClass(this.options.checkedClass)
                     .data('text', this.$element.find('.checkbox-text:eq(0)').text());
 
@@ -82,6 +84,7 @@ define([
         else {
             this.$checkbox.removeClass(this.options.checkedClass);
             this.$element.removeClass(this.options.checkedClass);
+            this.$checkbox.val('');
         }
     };
 
