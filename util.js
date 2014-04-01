@@ -167,17 +167,17 @@ define("Util", [
             });
         },
                 
-        sanitizeInnerUrl: function(url){      
+        sanitizeInnerUrl: function(url, prefix){      
             //clean start and trailing slash
             url = url.replace(/^\//, '').replace(/\/$/, '');
 
             //clean router prefix
-            if (!Config.router_prefix)
+            if (!prefix)
                 return url;
             
-            url = url.replace(Config.router_prefix, "").replace(/^\//, '');
+            url = url.replace(prefix, "").replace(/^\//, '');
             
-            return Config.router_prefix + (!url ? '' : '/' + url);
+            return prefix + (!url ? '' : '/' + url);
         },
                 
         /*
