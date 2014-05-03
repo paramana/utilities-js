@@ -344,7 +344,7 @@ define("Util", [
 
             var validParts = /dd?|DD?|mm?|MM?|yy(?:yy)?/g;
             var val = {
-                d: date.getUTCDate() + 1,
+                d: date.getDate(),
                 D: language.daysShort[date.getUTCDay()],
                 DD: language.days[date.getUTCDay()],
                 m: date.getUTCMonth() + 1,
