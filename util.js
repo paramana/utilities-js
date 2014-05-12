@@ -303,7 +303,7 @@ define("Util", [
                 }
             }
 
-            return Math.ceil(Math.abs(age));
+            return Math.floor(Math.abs(age));
         },
         isItNow: function(date){
             date = date + '';
