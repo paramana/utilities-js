@@ -25,15 +25,23 @@ define([
             
             $this.replaceWith($newEl);
             
-            $newInput.change(function() {
+            $newInput.change(function(event) {
                 var $this = $(this);
+
                 // Remove any previous file names
                 $this.parent().next('.file-input-name').remove();
-                if ($this.prop('files').length > 1) {
+                if ($this.prop('files') && $this.prop('files').length > 1) {
                     $this.parent().after('<span class="file-input-name">' + $this[0].files.length + ' files</span>');
                 }
                 else {
-                    $this.parent().after('<span class="file-input-name">' + $this.val().replace('C:\\fakepath\\', '') + '</span>');
+                    var fileName = $this.val();
+                    if (!fileName && $.browser.msie)
+                        fileName = event.target.value;
+
+                    if (fileName = fileName.match(/[^\\/:*?"<>|\r\n]+$/))
+                        fileName = fileName[0];
+
+                    $this.parent().after('<span class="file-input-name">' + fileName + '</span>');
                 }
             });
         });
