@@ -15,7 +15,7 @@ define("CacheProvider", [], function() {
 
     // values will be stored here
     var CacheProvider = {},
-            _cache = {};
+            _cache    = {};
 
     CacheProvider = {
         /**

@@ -1,13 +1,11 @@
 /*!
  * Version: 1.0
  * Started: 30-04-2013
- * Updated: 16-02-2014
+ * Updated: 13-10-2014
  * Author : paramana (hello AT paramana DOT com)
  *
  */
-define("Util", [
-    'Config'
-], function(Config) {    
+define("Util", function() {
     // Using ECMAScript 5 strict mode during development. By default r.js will ignore that.
     "use strict";
     
