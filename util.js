@@ -255,11 +255,14 @@ define("Util", function() {
             // Apply each element to the Date function
             return new Date(t[0], t[1]-1, t[2], t[3] || '', t[4] || '', t[5] || '');
         },
-        dateSQLToEu: function(date){
+        dateSQLToEu: function(date, delimiter){
             if (!date)
                 return date;
             
-            return date.replace(/(\d\d\d\d)-*(\d\d)*-*(\d\d)*/, "$3/$2/$1").replace(/^\//, '').replace(/^\//, '');
+            if (!delimiter)
+                delimiter = '/';
+
+            return date.replace(/(\d\d\d\d)-*(\d\d)*-*(\d\d)*/, "$3" + delimiter + "$2" + delimiter + "$1").replace(/^\//, '').replace(/^\//, '');
         },
         parseDate: function(str){
             if (!str)
