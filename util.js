@@ -1,7 +1,7 @@
 /*!
  * Version: 1.0
  * Started: 30-04-2013
- * Updated: 13-10-2014
+ * Updated: 08-03-2015
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -11,7 +11,7 @@ define("Util", function() {
     
     return {
         putCursorAtTheEnd: function($input){
-            $input.focus();
+            $input.trigger('focus');
 
             if ($input[0].setSelectionRange) {
                 var len = $input.val().length;
@@ -276,6 +276,9 @@ define("Util", function() {
             return {day: str[1], month: str[2], year: str[3]};
         },
         getAge: function (d1, d2, days, language){
+            if (!d1)
+                return '';
+
             if (typeof d1 == 'string')
                 d1 = new Date(d1);
 
