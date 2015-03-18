@@ -46,7 +46,7 @@ define("CacheProvider", [], function() {
                 catch (ex) {
                     if (ex.name == 'QUOTA_EXCEEDED_ERR') {
                         // developer needs to figure out what to start invalidating
-                        throw new Exception(v);
+                        throw v;
                         return;
                     }
                 }
