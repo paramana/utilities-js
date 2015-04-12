@@ -1,7 +1,7 @@
 /*!
  * Version: 1.0
  * Started: 07-02-2014
- * Updated: 07-02-2014
+ * Updated: 11-04-2015
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -48,7 +48,7 @@ define([
     CheckboxBtn.prototype.init = function() {
         this.$element.addClass('checkbox-element');
 
-        var dataValue = this.$element.attr('data-value'),
+        var dataValue = this.$element.data('value'),
             _value    = this.$checkbox.val();
 
         if (dataValue && dataValue == _value) {
@@ -71,7 +71,6 @@ define([
             _value  = this.originalValue;
 
         if (checked) {
-
             this.$checkbox
                     .val(_value)
                     .addClass(this.options.checkedClass)
@@ -79,7 +78,7 @@ define([
 
             this.$element
                     .addClass(this.options.checkedClass)
-                    .attr('data-value', _value);
+                    .data('value', _value);
         }
         else {
             this.$checkbox.removeClass(this.options.checkedClass);
@@ -123,9 +122,10 @@ define([
         
         this.$element.on({
            click: function(){
-               $(this)
-                       .find('input:checkbox')
-                       .prop('checked', 'checked')
+                var checked = _self.$checkbox.prop('checked');
+
+                _self.$checkbox
+                       .prop('checked', checked ? '' : 'checked')
                        .trigger('change');
            } 
         });

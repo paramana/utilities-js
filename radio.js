@@ -1,7 +1,7 @@
 /*!
  * Version: 1.0
  * Started: 28-01-2014
- * Updated: 31-01-2014
+ * Updated: 11-04-2015
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -47,7 +47,7 @@ define([
     RadioBtn.prototype.init = function() {
         this.$element.addClass('radio-element');
 
-        var dataValue = this.$element.attr('data-value'),
+        var dataValue = this.$element.data('value'),
             _value    = this.$radio.val();
 
         if (dataValue && dataValue == _value) {
@@ -78,7 +78,7 @@ define([
                     .removeClass(this.options.checkedClass)
                     .data('text', '')
                     .closest('.radio-element')
-                    .attr('data-value', _value)
+                    .data('value', _value)
                     .removeClass(this.options.checkedClass);
             
             this.$radio
@@ -87,7 +87,7 @@ define([
 
             this.$element
                     .addClass(this.options.checkedClass)
-                    .attr('data-value', _value);
+                    .data('value', _value);
         }
         else {
             this.$radio.removeClass(this.options.checkedClass);

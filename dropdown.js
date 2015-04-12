@@ -1,7 +1,7 @@
 /*!
  * Version: 1.0
  * Started: 11-06-2013
- * Updated: 31-01-2014
+ * Updated: 11-04-2015
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -72,7 +72,7 @@ define([
         
         this.$element
                 .removeClass(this.activeSelect + ' ' + this.error)
-                .attr('data-value', _value);
+                .data('value', _value);
 
         this.$text.text($option.text());
 
