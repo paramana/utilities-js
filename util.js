@@ -1,7 +1,7 @@
 /*!
  * Version: 1.0
  * Started: 30-04-2013
- * Updated: 08-03-2015
+ * Updated: 30-06-2016
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -9,7 +9,16 @@ define("Util", function() {
     // Using ECMAScript 5 strict mode during development. By default r.js will ignore that.
     "use strict";
     
+    if (typeof RegExp.escape == 'undefined') {
+        RegExp.escape = function(text) {
+          return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+        };
+    }
+
     return {
+        randomHexColor: function(){
+            return Math.floor(Math.random()*16777215).toString(16);
+        },
         putCursorAtTheEnd: function($input){
             $input.trigger('focus');
 
@@ -268,7 +277,7 @@ define("Util", function() {
             if (!str)
                 return {};
             
-            var str = str.match(/(\d+)*?\/*(\d+)*\/*(\d\d\d\d)/);
+            str = str.match(/(\d+)*?\/*(\d+)*\/*(\d\d\d\d)/);
         
             if (!str)
                 return {day:'', month:'', year:''};
