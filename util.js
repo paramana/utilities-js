@@ -83,7 +83,7 @@ define("Util", function() {
          * @final
          */
         includesProtocol: function(str) {
-            return /((?:mailto:|ftp:\/\/|http:\/\/)[^ <>'"{}|\\\^`\[\]]*)/g.test(str);
+            return /((?:mailto:|ftp:\/\/|http:\/\/|https:\/\/|sms:\/\/)[^ <>'"{}|\\\^`\[\]]*)/g.test(str);
         },
 
         /*
