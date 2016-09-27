@@ -1,7 +1,7 @@
 /*!
  * Version: 1.0
  * Started: 30-04-2013
- * Updated: 30-06-2016
+ * Updated: 27-09-2016
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -272,6 +272,14 @@ define("Util", function() {
                 delimiter = '/';
 
             return date.replace(/(\d\d\d\d)-*(\d\d)*-*(\d\d)*/, "$3" + delimiter + "$2" + delimiter + "$1").replace(/^\//, '').replace(/^\//, '');
+        },
+        dateJStoSQL: function(date){
+            if (!date)
+                date = new Date();
+
+            return date.getUTCFullYear() + "-" + this.padDate(1 + date.getUTCMonth()) + "-" + 
+                    this.padDate(date.getUTCDate()) + " " + this.padDate(date.getUTCHours()) + ":" + 
+                    this.padDate(date.getUTCMinutes()) + ":" + this.padDate(date.getUTCSeconds());
         },
         parseDate: function(str){
             if (!str)
