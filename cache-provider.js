@@ -1,7 +1,7 @@
 /*!
  * Version: 1.0
  * Started: 22-05-2013
- * Updated: 22-05-2013
+ * Updated: 20-09-2016
  * Author : paramana (hello AT paramana DOT com)
  *
  * Initial code taken from CacheProvider of Dustin Diaz (@ded) 
@@ -18,6 +18,20 @@ define("CacheProvider", [], function() {
             _cache    = {};
 
     CacheProvider = {
+        /**
+         * {String} k - the key
+         * {Boolean} local - get this from local storage?
+         * {Boolean} o - is the value you put in local storage an object?
+         */
+        getAll: function(local) {
+            if (local && CacheProvider.hasLocalStorage) {
+                return localStorage || undefined;
+            }
+            else {
+                return _cache || undefined;
+            }
+        },
+
         /**
          * {String} k - the key
          * {Boolean} local - get this from local storage?
