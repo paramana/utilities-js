@@ -1,7 +1,7 @@
 /*!
  * Version: 1.0
  * Started: 30-04-2013
- * Updated: 06-10-2016
+ * Updated: 16-01-2017
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -93,10 +93,14 @@ define("Util", function() {
          * @return {string}  the seo string
          * @final
          */
-        removeSpecialChar: function(str){
+        removeSpecialChar: function(str, delimiter){
             if(!str)
                 return '';
-            return str.replace(/(\s|’|~|`|!|@|#|\$|\%|\^|\&|\*|\(|\)|\-|_|\+|\=|\[|\]|\{|\}|;|:|"|\'|<|>|\?|\\|\/|\.|,|…|΄)+/, '_');
+
+            if (!delimiter)
+                delimiter = '_';
+
+            return str.replace(/(\s|’|~|`|!|@|#|\$|\%|\^|\&|\*|\(|\)|\-|_|\+|\=|\[|\]|\{|\}|;|:|"|\'|<|>|\?|\\|\/|\.|,|…|΄)+/, delimiter);
         },
 
         /*
@@ -264,14 +268,14 @@ define("Util", function() {
             // Apply each element to the Date function
             return new Date(t[0], t[1]-1, t[2], t[3] || '', t[4] || '', t[5] || '');
         },
-        dateSQLToEu: function(date, delimiter, strict){
+        dateSQLToEu: function(date, delimiter){
             if (!date)
                 return date;
             
             if (!delimiter)
                 delimiter = '/';
 
-            return date.replace(/(\d\d\d\d)-*(\d\d)*-*(\d\d)*(.*)/, "$3" + delimiter + "$2" + delimiter + "$1" + (!strict ? '$4' : '')).replace(/^\//, '').replace(/^\//, '');
+            return date.replace(/(\d\d\d\d)-*(\d\d)*-*(\d\d)*/, "$3" + delimiter + "$2" + delimiter + "$1").replace(/^\//, '').replace(/^\//, '');
         },
         dateJStoSQL: function(date){
             if (!date)
