@@ -97,10 +97,10 @@ define("Util", function() {
             if(!str)
                 return '';
 
-            if (!delimiter)
+            if (typeof delimiter == "undefined")
                 delimiter = '_';
 
-            return str.replace(/(\s|’|~|`|!|@|#|\$|\%|\^|\&|\*|\(|\)|\-|_|\+|\=|\[|\]|\{|\}|;|:|"|\'|<|>|\?|\\|\/|\.|,|…|΄)+/, delimiter);
+            return str.replace(/(\s|’|~|`|!|@|#|\$|\%|\^|\&|\*|\(|\)|\-|_|\+|\=|\[|\]|\{|\}|;|:|"|\'|<|>|\?|\\|\/|\.|,|…|΄)+/g, delimiter);
         },
 
         /*
