@@ -317,7 +317,7 @@ define("Util", function() {
             age = diff / divider;
 
             if (days) {
-                if (age > 0 && age < 1) {
+                if (language.today && age > 0 && age < 1) {
                     return language.today;
                 }
                 else if (language.tomorrow && age < 0 && age > -1) {
