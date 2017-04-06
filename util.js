@@ -268,14 +268,14 @@ define("Util", function() {
             // Apply each element to the Date function
             return new Date(t[0], t[1]-1, t[2], t[3] || '', t[4] || '', t[5] || '');
         },
-        dateSQLToEu: function(date, delimiter){
+        dateSQLToEu: function(date, delimiter, strict){
             if (!date)
                 return date;
             
             if (!delimiter)
                 delimiter = '/';
 
-            return date.replace(/(\d\d\d\d)-*(\d\d)*-*(\d\d)*/, "$3" + delimiter + "$2" + delimiter + "$1").replace(/^\//, '').replace(/^\//, '');
+            return date.replace(/(\d\d\d\d)-*(\d\d)*-*(\d\d)*(.*)/, "$3" + delimiter + "$2" + delimiter + "$1" + (!strict ? '$4' : '')).replace(/^\//, '').replace(/^\//, '');
         },
         dateJStoSQL: function(date){
             if (!date)
