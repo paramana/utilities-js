@@ -303,9 +303,13 @@ define("Util", function() {
             if (typeof d1 == 'string')
                 d1 = new Date(d1);
 
+            if (d2 && typeof d2 == 'string')
+                d2 = new Date(d2);
+            else
+                d2 = new Date();
+
             d1.setHours(0, 0, 0, 0);
 
-            d2 = d2 || new Date();
             var diff    = d2.getTime() - d1.getTime(),
                 divider = 1000 * 60 * 60 * 24,
                 age     = '';
@@ -313,13 +317,13 @@ define("Util", function() {
             if (!days)
                 divider = divider * 365.25;
 
-            if (!diff)
+            if (diff === false)
                 return age;
 
             age = diff / divider;
 
             if (days) {
-                if (language.today && age > 0 && age < 1) {
+                if (language.today && age >= 0 && age < 1) {
                     return language.today;
                 }
                 else if (language.tomorrow && age < 0 && age > -1) {
