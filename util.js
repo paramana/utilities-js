@@ -303,6 +303,8 @@ define("Util", function() {
             if (typeof d1 == 'string')
                 d1 = new Date(d1);
 
+            d1.setHours(0, 0, 0, 0);
+
             d2 = d2 || new Date();
             var diff    = d2.getTime() - d1.getTime(),
                 divider = 1000 * 60 * 60 * 24,
