@@ -373,7 +373,7 @@ define("Util", function() {
                 return {separators: separators, parts: parts};
             }
 
-            var validParts = /dd?|DD?|mm?|MM?|yy(?:yy)?/g;
+            var validParts = /dd?|DD?|mm?|MM?|yy(?:yy)?|hh?|ii?|ss?/g;
             var val = {
                 d: date.getDate(),
                 D: language.daysShort[date.getUTCDay()],
@@ -382,11 +382,17 @@ define("Util", function() {
                 M: language.monthsShort[date.getUTCMonth()],
                 MM: language.months[date.getUTCMonth()],
                 yy: date.getUTCFullYear().toString().substring(2),
-                yyyy: date.getUTCFullYear()
+                yyyy: date.getUTCFullYear(),
+                h: date.getHours(),
+                i: date.getMinutes(),
+                s: date.getSeconds()
             };
 
             val.dd = (val.d < 10 ? '0' : '') + val.d;
             val.mm = (val.m < 10 ? '0' : '') + val.m;
+            val.hh = (val.h < 10 ? '0' : '') + val.h;
+            val.ii = (val.i < 10 ? '0' : '') + val.i;
+            val.ss = (val.s < 10 ? '0' : '') + val.s;
             format = parseFormat(format);
 
             var newDate = [],
