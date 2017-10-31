@@ -1,0 +1,19 @@
+{
+  "name": "utilities",
+  "version": "1.0.0",
+  "description": "Common js utilities, functions and plugins used in our applications",
+  "main": "utitlities.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paranama/utilities-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paranama/utilities-js/issues"
+  },
+  "homepage": "https://github.com/paranama/utilities-js#readme"
+}
