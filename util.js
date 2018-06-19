@@ -5,7 +5,7 @@
  * Author : paramana (hello AT paramana DOT com)
  *
  */
-define([
+define("Util", [
     'jquery'
 ], function($) {
     // Using ECMAScript 5 strict mode during development. By default r.js will ignore that.
