@@ -1,21 +1,20 @@
 /*!
  * Version: 1.0
  * Started: 22-05-2013
- * Updated: 20-09-2016
+ * Updated: 19-07-2018
  * Author : paramana (hello AT paramana DOT com)
  *
- * Initial code taken from CacheProvider of Dustin Diaz (@ded) 
+ * Initial code taken from CacheProvider of Dustin Diaz (@ded)
  * http://www.dustindiaz.com/javascript-cache-provider/
  *
  */
 
-define("CacheProvider", [], function() {
-    // Using ECMAScript 5 strict mode during development. By default r.js will ignore that.
-    "use strict";
+define('CacheProvider', [], function() {
+    'use strict';
 
     // values will be stored here
     var CacheProvider = {},
-            _cache    = {};
+        _cache = {};
 
     CacheProvider = {
         /**
@@ -24,12 +23,10 @@ define("CacheProvider", [], function() {
          * {Boolean} o - is the value you put in local storage an object?
          */
         getAll: function(local) {
-            if (local && CacheProvider.hasLocalStorage) {
+            if (local && CacheProvider.hasLocalStorage)
                 return localStorage || undefined;
-            }
-            else {
+            else
                 return _cache || undefined;
-            }
         },
 
         /**
@@ -77,16 +74,16 @@ define("CacheProvider", [], function() {
          * {Boolean} local - put this in local storage
          */
         clear: function(k, local) {
-            if (local && CacheProvider.hasLocalStorage) {
+            if (local && CacheProvider.hasLocalStorage)
                 localStorage.removeItem(k);
-            }
+
             // delete in both caches - doesn't hurt.
             delete _cache[k];
         },
         /**
          * Empty the cache
-         * 
-         * {Boolean} all - if true clears everything and the varibles cache
+         *
+         * {Boolean} all - if true clears everything and the variables cache
          */
         empty: function(all) {
             if (CacheProvider.hasLocalStorage)
@@ -98,7 +95,7 @@ define("CacheProvider", [], function() {
     };
 
     try {
-        CacheProvider.hasLocalStorage = ('localStorage' in window) && window['localStorage'] !== null;
+        CacheProvider.hasLocalStorage = ('localStorage' in window) && window['localStorage'] !== null && typeof localStorage !== 'undefined';
     }
     catch (ex) {
         CacheProvider.hasLocalStorage = false;
