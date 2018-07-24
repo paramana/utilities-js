@@ -331,7 +331,7 @@ define("Util", [
 
             age = diff / divider;
 
-            if (days) {
+            if (days && language) {
                 if (language.today && age >= 0 && age < 1) {
                     return language.today;
                 }
