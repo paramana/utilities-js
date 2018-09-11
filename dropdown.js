@@ -33,14 +33,15 @@ define(['jquery'], function($) {
     }
 
     Dropdown.prototype.init = function() {
+        var $selected;
+
         if (this.$element.hasClass('dropdown-element'))
             return;
 
         this.$element.addClass('dropdown-element');
         this.events();
 
-        var $selected;
-        if (this.options.value)
+        if (this.options.value !== false || this.options.value !== '')
             $selected = this.$select.find('option[value="' + this.options.value + '"]').attr('selected', 'selected');
         else
             $selected = this.$select.find('option[selected="selected"]');
