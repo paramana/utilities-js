@@ -4,7 +4,7 @@ define(['jquery'], function($) {
 
     var $fileInputs;
 
-    function init() {
+    function add() {
         $fileInputs = $('input[type=file].file-input');
 
         $fileInputs.each(function() {
@@ -52,7 +52,8 @@ define(['jquery'], function($) {
     }
 
     return {
-        init: init,
+        init: add,
+        add: add,
         remove: remove
     };
 });
