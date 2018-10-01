@@ -1,30 +1,30 @@
-define([
-    'jquery'
-], function($) {
+define(['jquery'], function($) {
     // Using ECMAScript 5 strict mode during development. By default r.js will ignore that.
-    "use strict";
-    
+    'use strict';
+
+    var $fileInputs;
+
     function init() {
-        $('input[type=file].file-input').each(function(i, elem) {
+        $fileInputs = $('input[type=file].file-input');
+
+        $fileInputs.each(function() {
             var $this      = $(this),
                 buttonWord = 'Browse';
-                
+
             // Maybe some fields don't need to be standardized.
-            if ($this.data('file-input-enabled')) {
+            if ($this.data('file-input-enabled'))
                 return;
-            }
 
             if (typeof $this.attr('title') != 'undefined')
                 buttonWord = $this.attr('title');
-            
+
             var $newInput = $this.clone().data('file-input-enabled', true),
-                $newEl    = $('<a class="file-input-wrapper btn ' + $this.attr('class') + '"></a>')
-                                .append(buttonWord)
-                                .append($newInput);
-                
-            
+                $newEl = $('<a class="file-input-wrapper btn ' + $this.attr('class') + '"></a>')
+                            .append(buttonWord)
+                            .append($newInput);
+
             $this.replaceWith($newEl);
-            
+
             $newInput.change(function(event) {
                 var $this = $(this);
 
@@ -47,7 +47,12 @@ define([
         });
     }
 
+    function remove(){
+        $fileInputs.off();
+    }
+
     return {
-        init: init
+        init: init,
+        remove: remove
     };
 });
