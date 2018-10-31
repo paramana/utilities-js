@@ -48,7 +48,9 @@ define(['jquery'], function($) {
     }
 
     function remove(){
-        $fileInputs.off();
+        if ($fileInputs) {
+            $fileInputs.off();
+        }
     }
 
     return {
