@@ -55,7 +55,7 @@ define(['jquery'], function($) {
             return false;
 
         var _value  = value || this.$select.prop('value'),
-            $option = this.$select.find('option[value="' + _value + '"]');
+            $option = this.$select.find('option[value="' + _value + '"]:eq(0)');
 
         if (!$option.length) {
             _value  = '';
