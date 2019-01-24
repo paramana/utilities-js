@@ -35,7 +35,8 @@ define(['jquery'], function($) {
                 }
                 else {
                     var fileName = $this.val();
-                    if (!fileName && $.browser.msie)
+
+                    if (!fileName && ($.browser && $.browser.msie))
                         fileName = event.target.value;
 
                     if (fileName = fileName.match(/[^\\/:*?"<>|\r\n]+$/))
@@ -50,7 +51,7 @@ define(['jquery'], function($) {
     function remove(){
         if (!$fileInputs || !$fileInputs.length)
             return;
-            
+
         $fileInputs.off();
     }
 
