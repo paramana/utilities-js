@@ -1,7 +1,7 @@
 /*!
  * Version: 1.0
  * Started: 11-06-2013
- * Updated: 11-09-2018
+ * Updated: 30-01-2019
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -125,6 +125,10 @@ define(['jquery'], function($) {
         this.$select.attr('disabled', 'disabled');
         this.enabled = false;
     }
+
+    Dropdown.prototype.destroy = function() {
+        this.$select.off();
+    };
 
     $.fn[pluginName] = function(options) {
         return this.each(function() {

@@ -133,6 +133,11 @@ define(['jquery'], function($) {
         this.enabled = false;
     };
 
+    CheckboxBtn.prototype.destroy = function() {
+        this.$checkbox.off();
+        this.$element.off();
+    };
+
     $.fn[pluginName] = function(options) {
         return this.each(function() {
             if (!$.data(this, 'plugin_' + pluginName)) {
