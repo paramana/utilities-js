@@ -1,7 +1,7 @@
 /*!
  * Version: 1.0
  * Started: 11-06-2013
- * Updated: 30-01-2019
+ * Updated: 06-01-2019
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -47,7 +47,7 @@ define(['jquery'], function($) {
             $selected = this.$select.find('option[selected="selected"]');
 
         if ($selected.length)
-            this.$select.val($selected.prop('value')).trigger('change');
+            this.$select.val($selected.prop('value')).trigger('change', {isFromPlugin: true});
     };
 
     Dropdown.prototype.setValue = function(value) {

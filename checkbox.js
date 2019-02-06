@@ -1,7 +1,7 @@
 /*!
  * Version: 1.0
  * Started: 07-02-2014
- * Updated: 30-01-2019
+ * Updated: 06-01-2019
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -49,7 +49,7 @@ define(['jquery'], function($) {
         this.events();
 
         if (dataValue && dataValue == _value) {
-            this.$checkbox.trigger('change');
+            this.$checkbox.trigger('change', {isFromPlugin: true});
         }
     };
 
@@ -116,7 +116,7 @@ define(['jquery'], function($) {
 
                 _self.$checkbox
                     .prop('checked', checked ? '' : 'checked')
-                    .trigger('change');
+                    .trigger('change', {isFromPlugin: true});
             }
         });
     };
