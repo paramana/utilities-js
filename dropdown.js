@@ -47,7 +47,7 @@ define(['jquery'], function($) {
             $selected = this.$select.find('option[selected="selected"]');
 
         if ($selected.length)
-            this.$select.val($selected.prop('value')).trigger('change', {isFromPlugin: true});
+            this.$select.val($selected.prop('value')).trigger('change', {isTriggered: true});
     };
 
     Dropdown.prototype.setValue = function(value) {
