@@ -49,7 +49,7 @@ define(['jquery'], function($) {
         this.events();
 
         if (dataValue && dataValue == _value) {
-            this.$checkbox.trigger('change', {isTriggered: true});
+            this.$checkbox.trigger('change');
         }
     };
 
@@ -116,7 +116,7 @@ define(['jquery'], function($) {
 
                 _self.$checkbox
                     .prop('checked', checked ? '' : 'checked')
-                    .trigger('change', {isTriggered: true});
+                    .trigger('change');
             }
         });
     };
