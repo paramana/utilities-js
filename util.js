@@ -1,7 +1,7 @@
 /*!
- * Version: 1.0
+ * Version: 1.1
  * Started: 30-04-2013
- * Updated: 06-11-2017
+ * Updated: 22-03-2019
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -260,6 +260,14 @@ define("Util", [
 
             return ('0' + date).slice(-2);
         },
+        dateJStoSQL: function (date) {
+            if (!date)
+                date = new Date();
+
+            return date.getUTCFullYear() + "-" + this.padDate(1 + date.getUTCMonth()) + "-" +
+                this.padDate(date.getUTCDate()) + " " + this.padDate(date.getUTCHours()) + ":" +
+                this.padDate(date.getUTCMinutes()) + ":" + this.padDate(date.getUTCSeconds());
+        },
         dateSQLToJS: function (date) {
             if (!date)
                 return date;
@@ -286,19 +294,29 @@ define("Util", [
 
             return date.replace(/(\d\d\d\d)-*(\d\d)*-*(\d\d)*(.*)/, "$3" + delimiter + "$2" + delimiter + "$1" + (!strict ? '$4' : '')).replace(/^\//, '').replace(/^\//, '');
         },
-        dateJStoSQL: function (date) {
+        dateEuToSQL: function (date, delimiter) {
             if (!date)
-                date = new Date();
+                return date;
 
-            return date.getUTCFullYear() + "-" + this.padDate(1 + date.getUTCMonth()) + "-" +
-                this.padDate(date.getUTCDate()) + " " + this.padDate(date.getUTCHours()) + ":" +
-                this.padDate(date.getUTCMinutes()) + ":" + this.padDate(date.getUTCSeconds());
+            date = this.parseDate(date, delimiter);
+
+            return date.year + '-' + date.month + (date.day ? '-' + date.day : '');
         },
-        parseDate: function (str) {
+        dateEuToJS: function (date, delimiter) {
+            if (!date)
+                return date;
+
+            return new Date(this.dateEuToSQL(date));
+        },
+        parseDate: function (str, delimiter) {
             if (!str)
                 return {};
 
-            str = str.match(/(\d+)*?\/*(\d+)*\/*(\d\d\d\d)/);
+            if (!delimiter)
+                delimiter = '/';
+
+            var matchRegExp = new RegExp('([0-9]+)*?' + delimiter + '*([0-9]+)*' + delimiter + '*([0-9]{4})');
+            str = str.match(matchRegExp);
 
             if (!str)
                 return { day: '', month: '', year: '' };
