@@ -1,7 +1,7 @@
 /*!
  * Version: 1.1
  * Started: 30-04-2013
- * Updated: 22-03-2019
+ * Updated: 14-05-2019
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -67,7 +67,7 @@ define("Util", [
         },
 
         /*
-         * Vazei ta links se ena href
+         * Put links into an anchor tag
          *
          * @param  {string} str
          * @return {string}
@@ -438,6 +438,21 @@ define("Util", [
         isNot: function (c) {
             // a var that is null, false, undefined, Infinity, NaN and c isn't a string
             return (!c && typeof c != "string" && c !== 0 || (typeof c == "number" && !isFinite(c)) || c == "undefined");
+        },
+
+        /**
+         * Converts new lines to <br> tags
+         * @param {String} str the original string
+         * @param {Boolean} isxhtml weather the returned string should be in XHTML format
+         * @return {String} the modified string
+         */
+        nl2br: function(str, isxhtml) {
+            if (typeof str === 'undefined' || str === null) {
+                return '';
+            }
+
+            var breakTag = (isxhtml || typeof isxhtml === 'undefined') ? '<br />' : '<br>';
+            return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
         },
 
         /**
