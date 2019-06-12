@@ -70,6 +70,8 @@ define(['jquery'], function($) {
 
         if (_value)
             this.$select.data('text', $option.text());
+        else
+            this.$select.data('text', "");
 
         if (value == null) {
             this.options.onchange.call(this.options.rel, _value);
