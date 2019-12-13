@@ -17,6 +17,26 @@ define("Util", [
         };
     }
 
+    function replaceAll(str, strTarget, strSubString) {
+        if (!str)
+            return str;
+
+        var intIndexOfMatch = str.indexOf(strTarget);
+
+        // Keep looping while an instance of the target string
+        // still exists in the string.
+        while (intIndexOfMatch != -1) {
+            // Relace out the current instance.
+            str = str.replace(strTarget, strSubString);
+
+            // Get the index of any next matching substring.
+            intIndexOfMatch = str.indexOf(strTarget);
+        }
+
+        // Return the updated string with ALL the target strings
+        // replaced out with the new substring.
+        return (str);
+    }
     return {
         randomHexColor: function () {
             return Math.floor(Math.random() * 16777215).toString(16);
@@ -113,14 +133,24 @@ define("Util", [
          * @return {string}  the seo string
          * @final
          */
-        toSeoStr: function (str) {
+        toSeoStr: function (str, language) {
             if (!str)
                 return str;
 
             var lettersEN = ["u", "i", "u", "i", "a", "b", "ps", "d", "e", "f", "g", "h", "i", "ks", "k", "l", "m", "n", "o", "p", "r", "s", "t", "8", "u", "w", "x", "z", "q", "v", "a", "b", "ps", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "8", "u", "o", "x", "z", "s", "a", "e", "h", "i", "o", "u", "w", "A", "E", "H", "I", "O", "U", "W"],
-                lettersGR = ["ϋ", "ϊ", "Ϋ", "Ϊ", "Α", "Β", "Ψ", "Δ", "Ε", "Φ", "Γ", "Η", "Ι", "Ξ", "Κ", "Λ", "Μ", "Ν", "Ο", "Π", "Ρ", "Σ", "Τ", "Θ", "Υ", "Ω", "Χ", "Ζ", "Q", "V", "α", "β", "ψ", "δ", "ε", "φ", "γ", "η", "ι", "ξ", "κ", "λ", "μ", "ν", "ο", "π", "ρ", "σ", "τ", "θ", "υ", "ω", "χ", "ζ", "ς", "ά", "έ", "ή", "ί", "ό", "ύ", "ώ", "Ά", "Έ", "Ή", "Ί", "Ό", "Ύ", "Ώ"];
-            for (var i = 0, len = lettersEN.length; i < len; i++) {
-                str = str.replaceAll(lettersGR[i], lettersEN[i]);
+                lettersGR = ["ϋ", "ϊ", "Ϋ", "Ϊ", "Α", "Β", "Ψ", "Δ", "Ε", "Φ", "Γ", "Η", "Ι", "Ξ", "Κ", "Λ", "Μ", "Ν", "Ο", "Π", "Ρ", "Σ", "Τ", "Θ", "Υ", "Ω", "Χ", "Ζ", "Q", "V", "α", "β", "ψ", "δ", "ε", "φ", "γ", "η", "ι", "ξ", "κ", "λ", "μ", "ν", "ο", "π", "ρ", "σ", "τ", "θ", "υ", "ω", "χ", "ζ", "ς", "ά", "έ", "ή", "ί", "ό", "ύ", "ώ", "Ά", "Έ", "Ή", "Ί", "Ό", "Ύ", "Ώ"],
+
+                lettersWithAccentLatin = ["_", "á", "à", "ã", "â", "À", "Á", "Ã", "Â", "é", "è", "ê", "É", "È", "Ê", "í", "ì", "î", "Í", "Ì", "Î", "ó", "ò", "ô", "õ", "Ó", "Ò", "Ô", "Õ", "ú", "ù", "û", "ü", "Ú", "Ù", "Û", "Ü", "ç", "Ç", "ñ", "Ñ"],
+                lettersWithoutAccentLatin = ["-", "a", "a", "a", "a", "a", "a", "a", "a", "e", "e", "e", "e", "e", "e", "i", "i", "i", "i", "i", "i", "o", "o", "o", "o", "o", "o", "o", "o", "u", "u", "u", "u", "u", "u", "u", "u", "c", "c", "n", "n"];
+
+            if (language == 'el') {
+                for (var i = 0, len = lettersEN.length; i < len; i++) {
+                    str = replaceAll(str, lettersGR[i], lettersEN[i]);
+                }
+            } else {
+                for (var i = 0, len = lettersWithoutAccentLatin.length; i < len; i++) {
+                    str = replaceAll(str, lettersWithAccentLatin[i], lettersWithoutAccentLatin[i]);
+                }
             }
             return str.toLowerCase();
         },
@@ -133,26 +163,7 @@ define("Util", [
          * @param string strSubString The string you want to replace in.
          *
          */
-        replaceAll: function (str, strTarget, strSubString) {
-            if (!str)
-                return str;
-
-            var intIndexOfMatch = str.indexOf(strTarget);
-
-            // Keep looping while an instance of the target string
-            // still exists in the string.
-            while (intIndexOfMatch != -1) {
-                // Relace out the current instance.
-                str = str.replace(strTarget, strSubString);
-
-                // Get the index of any next matching substring.
-                intIndexOfMatch = str.indexOf(strTarget);
-            }
-
-            // Return the updated string with ALL the target strings
-            // replaced out with the new substring.
-            return (str);
-        },
+        replaceAll: replaceAll,
 
         /**
          * Casts the first character in a string to uppercase with greek σ support.
