@@ -41,7 +41,7 @@ define(['jquery'], function($) {
         this.$element.addClass('dropdown-element');
         this.events();
 
-        if (this.options.value !== false || this.options.value !== '')
+        if (this.options.value !== false && this.options.value !== '')
             $selected = this.$select.find('option[value="' + this.options.value + '"]').attr('selected', 'selected');
         else
             $selected = this.$select.find('option[selected="selected"]');
