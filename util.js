@@ -242,7 +242,7 @@ define("Util", [
                     var k = decodeParam(e[1]);
                     var v = decodeParam(e[2]);
                     if (params[k] !== undefined) {
-                        if (!$.isArray(params[k])) {
+                        if (!Array.isArray(params[k])) {
                             params[k] = [params[k]];
                         }
                         params[k].push(v);

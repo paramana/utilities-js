@@ -314,7 +314,7 @@
 
 		setDaysOfWeekDisabled: function(daysOfWeekDisabled){
 			this.daysOfWeekDisabled = daysOfWeekDisabled||[];
-			if (!$.isArray(this.daysOfWeekDisabled)) {
+			if (!Array.isArray(this.daysOfWeekDisabled)) {
 				this.daysOfWeekDisabled = this.daysOfWeekDisabled.split(/,\s*/);
 			}
 			this.daysOfWeekDisabled = $.map(this.daysOfWeekDisabled, function (d) {
