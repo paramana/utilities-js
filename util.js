@@ -1,7 +1,7 @@
 /*!
  * Version: 1.1
  * Started: 30-04-2013
- * Updated: 14-05-2019
+ * Updated: 02-05-2020
  * Author : paramana (hello AT paramana DOT com)
  *
  */
