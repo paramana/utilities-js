@@ -25,7 +25,7 @@ define(['jquery'], function($) {
 
             $this.replaceWith($newEl);
 
-            $newInput.change(function(event) {
+            $newInput.on('change', function(event) {
                 var $this = $(this);
 
                 // Remove any previous file names
