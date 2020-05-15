@@ -5,6 +5,7 @@
  * Author : paramana (hello AT paramana DOT com)
  *
  */
+
 define('Util', ['jquery'], function($) {
     'use strict';
 
@@ -23,7 +24,7 @@ define('Util', ['jquery'], function($) {
         // Keep looping while an instance of the target string
         // still exists in the string.
         while (intIndexOfMatch != -1) {
-            // Relace out the current instance.
+            // Replace out the current instance.
             str = str.replace(strTarget, strSubString);
 
             // Get the index of any next matching substring.
@@ -225,6 +226,13 @@ define('Util', ['jquery'], function($) {
             }
 
             return Object.keys(obj).length;
+        },
+
+        getQuerySearchParam: function(){
+            if (!history || !history.pushState)
+                return (location.hash.replace(/^#/, '') || '?').split('?')[1];
+    
+            return window.location.search || '';
         },
 
         queryParams: function(query) {
