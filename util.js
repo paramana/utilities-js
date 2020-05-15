@@ -1,17 +1,21 @@
 /*!
  * Version: 1.1
  * Started: 30-04-2013
- * Updated: 15-05-2020
+ * Updated: 02-05-2020
  * Author : paramana (hello AT paramana DOT com)
  *
  */
 
-define('Util', ['jquery'], function($) {
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('jquery')) :
+    typeof define === 'function' && define.amd ? define(['jquery'], factory) :
+    (global.Util = factory(global.jQuery));
+}(this, (function ($) {
     'use strict';
 
     if (typeof RegExp.escape == 'undefined') {
-        RegExp.escape = function(text) {
-            return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+        RegExp.escape = function (text) {
+            return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
         };
     }
 
@@ -24,7 +28,7 @@ define('Util', ['jquery'], function($) {
         // Keep looping while an instance of the target string
         // still exists in the string.
         while (intIndexOfMatch != -1) {
-            // Replace out the current instance.
+            // Relpace out the current instance.
             str = str.replace(strTarget, strSubString);
 
             // Get the index of any next matching substring.
@@ -37,10 +41,10 @@ define('Util', ['jquery'], function($) {
     }
 
     return {
-        randomHexColor: function() {
+        randomHexColor: function () {
             return Math.floor(Math.random() * 16777215).toString(16);
         },
-        putCursorAtTheEnd: function($input) {
+        putCursorAtTheEnd: function ($input) {
             $input.trigger('focus');
 
             if ($input[0].setSelectionRange) {
@@ -58,7 +62,7 @@ define('Util', ['jquery'], function($) {
          * @returns {Boolean} returns true if is empty
          *
          */
-        emptyInput: function($input) {
+        emptyInput: function ($input) {
             if (!$input.length)
                 return false;
 
@@ -70,7 +74,7 @@ define('Util', ['jquery'], function($) {
 
             return false;
         },
-        uriToObj: function(str) {
+        uriToObj: function (str) {
             if (!str)
                 return str;
 
@@ -92,7 +96,7 @@ define('Util', ['jquery'], function($) {
          * @return {string}
          * @final
          */
-        wrapLink: function(str) {
+        wrapLink: function (str) {
             return str.replace(/((?:mailto:|ftp:\/\/|http:\/\/|https:\/\/)[^ <>'"{}|\\\^`\[\]]*)/g, '<a target="_blank" href="$1">$1</a>');
         },
 
@@ -103,7 +107,7 @@ define('Util', ['jquery'], function($) {
          * @return {string}
          * @final
          */
-        includesProtocol: function(str) {
+        includesProtocol: function (str) {
             return /((?:mailto:|ftp:\/\/|http:\/\/|https:\/\/|sms:\/\/)[^ <>'"{}|\\\^`\[\]]*)/g.test(str);
         },
 
@@ -114,11 +118,11 @@ define('Util', ['jquery'], function($) {
          * @return {string}  the seo string
          * @final
          */
-        removeSpecialChar: function(str, delimiter) {
+        removeSpecialChar: function (str, delimiter) {
             if (!str)
                 return '';
 
-            if (typeof delimiter == 'undefined')
+            if (typeof delimiter == "undefined")
                 delimiter = '_';
 
             return str.replace(/(\s|’|~|`|!|@|#|\$|\%|\^|\&|\*|\(|\)|\-|_|\+|\=|\[|\]|\{|\}|;|:|"|\'|<|>|\?|\\|\/|\.|,|…|΄)+/g, delimiter);
@@ -132,22 +136,21 @@ define('Util', ['jquery'], function($) {
          * @return {string}  the seo string
          * @final
          */
-        toSeoStr: function(str, language) {
+        toSeoStr: function (str, language) {
             if (!str)
                 return str;
 
-            var lettersEN = ['u', 'i', 'u', 'i', 'a', 'b', 'ps', 'd', 'e', 'f', 'g', 'h', 'i', 'ks', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', '8', 'u', 'w', 'x', 'z', 'q', 'v', 'a', 'b', 'ps', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', '8', 'u', 'o', 'x', 'z', 's', 'a', 'e', 'h', 'i', 'o', 'u', 'w', 'A', 'E', 'H', 'I', 'O', 'U', 'W'],
-                lettersGR = ['ϋ', 'ϊ', 'Ϋ', 'Ϊ', 'Α', 'Β', 'Ψ', 'Δ', 'Ε', 'Φ', 'Γ', 'Η', 'Ι', 'Ξ', 'Κ', 'Λ', 'Μ', 'Ν', 'Ο', 'Π', 'Ρ', 'Σ', 'Τ', 'Θ', 'Υ', 'Ω', 'Χ', 'Ζ', 'Q', 'V', 'α', 'β', 'ψ', 'δ', 'ε', 'φ', 'γ', 'η', 'ι', 'ξ', 'κ', 'λ', 'μ', 'ν', 'ο', 'π', 'ρ', 'σ', 'τ', 'θ', 'υ', 'ω', 'χ', 'ζ', 'ς', 'ά', 'έ', 'ή', 'ί', 'ό', 'ύ', 'ώ', 'Ά', 'Έ', 'Ή', 'Ί', 'Ό', 'Ύ', 'Ώ'],
+            var lettersEN = ["u", "i", "u", "i", "a", "b", "ps", "d", "e", "f", "g", "h", "i", "ks", "k", "l", "m", "n", "o", "p", "r", "s", "t", "8", "u", "w", "x", "z", "q", "v", "a", "b", "ps", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "8", "u", "o", "x", "z", "s", "a", "e", "h", "i", "o", "u", "w", "A", "E", "H", "I", "O", "U", "W"],
+                lettersGR = ["ϋ", "ϊ", "Ϋ", "Ϊ", "Α", "Β", "Ψ", "Δ", "Ε", "Φ", "Γ", "Η", "Ι", "Ξ", "Κ", "Λ", "Μ", "Ν", "Ο", "Π", "Ρ", "Σ", "Τ", "Θ", "Υ", "Ω", "Χ", "Ζ", "Q", "V", "α", "β", "ψ", "δ", "ε", "φ", "γ", "η", "ι", "ξ", "κ", "λ", "μ", "ν", "ο", "π", "ρ", "σ", "τ", "θ", "υ", "ω", "χ", "ζ", "ς", "ά", "έ", "ή", "ί", "ό", "ύ", "ώ", "Ά", "Έ", "Ή", "Ί", "Ό", "Ύ", "Ώ"],
 
-                lettersWithAccentLatin = ['_', 'á', 'à', 'ã', 'â', 'À', 'Á', 'Ã', 'Â', 'é', 'è', 'ê', 'É', 'È', 'Ê', 'í', 'ì', 'î', 'Í', 'Ì', 'Î', 'ó', 'ò', 'ô', 'õ', 'Ó', 'Ò', 'Ô', 'Õ', 'ú', 'ù', 'û', 'ü', 'Ú', 'Ù', 'Û', 'Ü', 'ç', 'Ç', 'ñ', 'Ñ'],
-                lettersWithoutAccentLatin = ['-', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'e', 'e', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'i', 'i', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'u', 'u', 'u', 'u', 'c', 'c', 'n', 'n'];
+                lettersWithAccentLatin = ["_", "á", "à", "ã", "â", "À", "Á", "Ã", "Â", "é", "è", "ê", "É", "È", "Ê", "í", "ì", "î", "Í", "Ì", "Î", "ó", "ò", "ô", "õ", "Ó", "Ò", "Ô", "Õ", "ú", "ù", "û", "ü", "Ú", "Ù", "Û", "Ü", "ç", "Ç", "ñ", "Ñ"],
+                lettersWithoutAccentLatin = ["-", "a", "a", "a", "a", "a", "a", "a", "a", "e", "e", "e", "e", "e", "e", "i", "i", "i", "i", "i", "i", "o", "o", "o", "o", "o", "o", "o", "o", "u", "u", "u", "u", "u", "u", "u", "u", "c", "c", "n", "n"];
 
             if (language == 'el') {
                 for (var i = 0, len = lettersEN.length; i < len; i++) {
                     str = replaceAll(str, lettersGR[i], lettersEN[i]);
                 }
-            }
-            else {
+            } else {
                 for (var i = 0, len = lettersWithoutAccentLatin.length; i < len; i++) {
                     str = replaceAll(str, lettersWithAccentLatin[i], lettersWithoutAccentLatin[i]);
                 }
@@ -170,7 +173,7 @@ define('Util', ['jquery'], function($) {
          *
          * @type {string}
          */
-        uCaseFirst: function(str) {
+        uCaseFirst: function (str) {
             if (!str)
                 return str;
 
@@ -182,16 +185,16 @@ define('Util', ['jquery'], function($) {
          *
          * @type {string}
          */
-        uCaseWords: function(str) {
+        uCaseWords: function (str) {
             if (!str)
                 return str;
 
-            return (str + '').toLowerCase().replace(/σ( +)|σ$/g, 'ς$1').replace(/^(.)|\s(.)/g, function($1) {
+            return (str + '').toLowerCase().replace(/σ( +)|σ$/g, 'ς$1').replace(/^(.)|\s(.)/g, function ($1) {
                 return $1.toUpperCase();
             });
         },
 
-        sanitizeInnerUrl: function(url, prefix) {
+        sanitizeInnerUrl: function (url, prefix) {
             //clean start and trailing slash
             url = url.replace(/^\//, '').replace(/\/$/, '');
 
@@ -199,7 +202,7 @@ define('Util', ['jquery'], function($) {
             if (!prefix)
                 return url;
 
-            url = url.replace(prefix, '').replace(/^\//, '');
+            url = url.replace(prefix, "").replace(/^\//, '');
 
             return prefix + (!url ? '' : '/' + url);
         },
@@ -211,13 +214,12 @@ define('Util', ['jquery'], function($) {
          * @returns Number the length of the object
          *
          */
-        objSize: function(obj) {
-            if (typeof obj !== 'object')
+        objSize: function (obj) {
+            if (typeof obj !== "object")
                 return 0;
 
             if (typeof Object.keys == null) {
                 var size = 0, key;
-
                 for (key in obj) {
                     if (obj.hasOwnProperty(key))
                         size++;
@@ -231,31 +233,28 @@ define('Util', ['jquery'], function($) {
         getQuerySearchParam: function(){
             if (!history || !history.pushState)
                 return (location.hash.replace(/^#/, '') || '?').split('?')[1];
-    
+
             return window.location.search || '';
         },
 
-        queryParams: function(query) {
-            var decodeParam = function(str) {
+        queryParams: function (query) {
+            var decodeParam = function (str) {
                 return decodeURIComponent(str.replace(/\+/g, ' '));
             };
-
-            var re = /([^&=]+)=?([^&]*)/g,
-                params = {},
-                e;
-
+            var re = /([^&=]+)=?([^&]*)/g;
+            var params = {}, e;
             if (query) {
-                if (query.substr(0, 1) == '?')
+                if (query.substr(0, 1) == '?') {
                     query = query.substr(1);
+                }
 
                 while (e = re.exec(query)) {
-                    var k = decodeParam(e[1]),
-                        v = decodeParam(e[2]);
-
+                    var k = decodeParam(e[1]);
+                    var v = decodeParam(e[2]);
                     if (params[k] !== undefined) {
-                        if (!Array.isArray(params[k]))
+                        if (!Array.isArray(params[k])) {
                             params[k] = [params[k]];
-
+                        }
                         params[k].push(v);
                     }
                     else {
@@ -265,7 +264,7 @@ define('Util', ['jquery'], function($) {
             }
             return params;
         },
-        arrayToObject: function(array, pad) {
+        arrayToObject: function (array, pad) {
             var obj = [],
                 _index = 1;
 
@@ -276,21 +275,21 @@ define('Util', ['jquery'], function($) {
 
             return obj;
         },
-        padDate: function(date) {
+        padDate: function (date) {
             if (!date)
                 return date;
 
             return ('0' + date).slice(-2);
         },
-        dateJStoSQL: function(date) {
+        dateJStoSQL: function (date) {
             if (!date)
                 date = new Date();
 
-            return date.getUTCFullYear() + '-' + this.padDate(1 + date.getUTCMonth()) + '-' +
-                this.padDate(date.getUTCDate()) + ' ' + this.padDate(date.getUTCHours()) + ':' +
-                this.padDate(date.getUTCMinutes()) + ':' + this.padDate(date.getUTCSeconds());
+            return date.getUTCFullYear() + "-" + this.padDate(1 + date.getUTCMonth()) + "-" +
+                this.padDate(date.getUTCDate()) + " " + this.padDate(date.getUTCHours()) + ":" +
+                this.padDate(date.getUTCMinutes()) + ":" + this.padDate(date.getUTCSeconds());
         },
-        dateSQLToJS: function(date) {
+        dateSQLToJS: function (date) {
             if (!date)
                 return date;
 
@@ -307,16 +306,16 @@ define('Util', ['jquery'], function($) {
 
             return new Date(t[0] + '-' + t[1] + '-' + t[2] + 'T' + (t[3] || '00') + ':' + (t[4] || '00') + ':' + (t[5] || '00') + z);
         },
-        dateSQLToEu: function(date, delimiter, strict) {
+        dateSQLToEu: function (date, delimiter, strict) {
             if (!date)
                 return date;
 
             if (!delimiter)
                 delimiter = '/';
 
-            return date.replace(/(\d\d\d\d)-*(\d\d)*-*(\d\d)*(.*)/, '$3' + delimiter + '$2' + delimiter + '$1' + (!strict ? '$4' : '')).replace(/^\//, '').replace(/^\//, '');
+            return date.replace(/(\d\d\d\d)-*(\d\d)*-*(\d\d)*(.*)/, "$3" + delimiter + "$2" + delimiter + "$1" + (!strict ? '$4' : '')).replace(/^\//, '').replace(/^\//, '');
         },
-        dateEuToSQL: function(date, delimiter) {
+        dateEuToSQL: function (date, delimiter) {
             if (!date)
                 return date;
 
@@ -324,13 +323,13 @@ define('Util', ['jquery'], function($) {
 
             return date.year + '-' + date.month + (date.day ? '-' + date.day : '');
         },
-        dateEuToJS: function(date, delimiter) {
+        dateEuToJS: function (date, delimiter) {
             if (!date)
                 return date;
 
             return new Date(this.dateEuToSQL(date));
         },
-        parseDate: function(str, delimiter) {
+        parseDate: function (str, delimiter) {
             if (!str)
                 return {};
 
@@ -345,7 +344,7 @@ define('Util', ['jquery'], function($) {
 
             return { day: str[1], month: str[2], year: str[3] };
         },
-        getAge: function(d1, d2, days, language) {
+        getAge: function (d1, d2, days, language) {
             if (!d1)
                 return '';
 
@@ -372,17 +371,20 @@ define('Util', ['jquery'], function($) {
             age = diff / divider;
 
             if (days && language) {
-                if (language.today && age >= 0 && age < 1)
+                if (language.today && age >= 0 && age < 1) {
                     return language.today;
-                else if (language.tomorrow && age < 0 && age > -1)
+                }
+                else if (language.tomorrow && age < 0 && age > -1) {
                     return language.tomorrow;
-                else if (language.yesterday && age > 1 && age < 2)
+                }
+                else if (language.yesterday && age > 1 && age < 2) {
                     return language.yesterday;
+                }
             }
 
             return Math.floor(Math.abs(age));
         },
-        isItNow: function(date) {
+        isItNow: function (date) {
             date = date + '';
             var today = new Date(),
                 year = today.getFullYear(),
@@ -399,21 +401,22 @@ define('Util', ['jquery'], function($) {
                     return true;
 
                 if (date.month == month) {
-                    if (!date.day || date.day == day)
+                    if (!date.day || date.day == day) {
                         return true;
+                    }
                 }
             }
 
             return false;
         },
-        formatDate: function(date, format, language) {
+        formatDate: function (date, format, language) {
             function parseFormat(format) {
                 // IE treats \0 as a string end in inputs (truncating the value),
                 // so it's a bad format delimiter, anyway
                 var separators = format.replace(validParts, '\0').split('\0'),
                     parts = format.match(validParts);
                 if (!separators || !separators.length || !parts || parts.length === 0) {
-                    throw new Error('Invalid date format.');
+                    throw new Error("Invalid date format.");
                 }
                 return { separators: separators, parts: parts };
             }
@@ -453,9 +456,9 @@ define('Util', ['jquery'], function($) {
          * @param {Mixed} value The variable to check
          * @return {Boolean} Whether the variable is considered false.
          */
-        isNot: function(c) {
+        isNot: function (c) {
             // a var that is null, false, undefined, Infinity, NaN and c isn't a string
-            return (!c && typeof c != 'string' && c !== 0 || (typeof c == 'number' && !isFinite(c)) || c == 'undefined');
+            return (!c && typeof c != "string" && c !== 0 || (typeof c == "number" && !isFinite(c)) || c == "undefined");
         },
 
         /**
@@ -465,8 +468,9 @@ define('Util', ['jquery'], function($) {
          * @return {String} the modified string
          */
         nl2br: function(str, isxhtml) {
-            if (typeof str === 'undefined' || str === null)
+            if (typeof str === 'undefined' || str === null) {
                 return '';
+            }
 
             var breakTag = (isxhtml || typeof isxhtml === 'undefined') ? '<br />' : '<br>';
             return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
@@ -493,17 +497,13 @@ define('Util', ['jquery'], function($) {
          *
          * @return {String} Returns a cookie name.
          */
-        setCookie: function(name, value, expire, path, domain, secure) {
-            var ck = name + '=' + escape(value) + ';';
-
-            if (expire)
-                ck += 'expires=' + new Date(expire + new Date().getTimezoneOffset() * 60).toGMTString() + ';';
-            if (path)
-                ck += 'path=' + path + ';';
-            if (domain)
-                ck += 'domain=' + domain + ';';
-            if (secure)
-                ck += 'secure';
+        setCookie: function (name, value, expire, path, domain, secure) {
+            var ck = name + "=" + escape(value) + ";";
+            if (expire) ck += "expires=" + new Date(expire +
+                new Date().getTimezoneOffset() * 60).toGMTString() + ";";
+            if (path) ck += "path=" + path + ";";
+            if (domain) ck += "domain=" + domain + ";";
+            if (secure) ck += "secure";
 
             document.cookie = ck;
             return value;
@@ -515,16 +515,15 @@ define('Util', ['jquery'], function($) {
          * @param {String} name the name of the stored cookie.
          * @return {String} Returns a value of the cookie or the empty string if it isn't found
          */
-        getCookie: function(name) {
-            var aCookie = document.cookie.split('; ');
+        getCookie: function (name) {
+            var aCookie = document.cookie.split("; ");
             for (var i = 0; i < aCookie.length; i++) {
-                var aCrumb = aCookie[i].split('=');
-
+                var aCrumb = aCookie[i].split("=");
                 if (name == aCrumb[0])
                     return unescape(aCrumb[1]);
             }
 
-            return '';
+            return "";
         },
 
         /**
@@ -533,8 +532,8 @@ define('Util', ['jquery'], function($) {
          * @param {String} name     the name of the stored cookie
          * @param {String} domain   the name of the domain of stored cookie
          */
-        delCookie: function(name, domain) {
-            document.cookie = name + '=blah; expires=Fri, 31 Dec 1999 23:59:59 GMT;' + (domain ? 'domain=' + domain : '');
+        delCookie: function (name, domain) {
+            document.cookie = name + "=blah; expires=Fri, 31 Dec 1999 23:59:59 GMT;" + (domain ? 'domain=' + domain : '');
         }
     };
-});
+})));

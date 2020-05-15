@@ -7,10 +7,10 @@
  */
 
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = global || self, global.RadioBtn = factory());
-}(this, function () {
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('jquery')) :
+    typeof define === 'function' && define.amd ? define(['jquery'], factory) :
+    (global.RadioBtn = factory(global.jQuery));
+}(this, (function ($) {
     'use strict';
 
     // Create the defaults once
@@ -159,4 +159,4 @@
             $.data(this, 'plugin_' + pluginName, new RadioBtn(this, options));
         });
     };
-}));
+})));
