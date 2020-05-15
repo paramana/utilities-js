@@ -1,12 +1,16 @@
 /*!
  * Version: 1.0
  * Started: 07-02-2014
- * Updated: 06-01-2019
+ * Updated: 15-05-2020
  * Author : paramana (hello AT paramana DOT com)
  *
  */
 
-define(['jquery'], function($) {
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+    typeof define === 'function' && define.amd ? define(factory) :
+    (global = global || self, global.CheckboxBtn = factory());
+}(this, function () {
     'use strict';
 
     var pluginName = 'checkbox',
@@ -14,7 +18,7 @@ define(['jquery'], function($) {
             activeClass: 'active',
             checkedClass:  'checked',
             rel: this,
-            onchange: function(){}
+            onChange: function(){}
         };
 
     function CheckboxBtn(element, options) {
@@ -41,16 +45,14 @@ define(['jquery'], function($) {
         var dataValue = this.$element.data('value'),
             _value    = this.$checkbox.val();
 
-        if (dataValue && dataValue == _value) {
+        if (dataValue && dataValue == _value)
             this.$checkbox.attr('checked', 'checked');
-        }
 
         this.toggleCheck();
         this.events();
 
-        if (dataValue && dataValue == _value) {
+        if (dataValue && dataValue == _value)
             this.$checkbox.trigger('change');
-        }
     };
 
     CheckboxBtn.prototype.toggleCheck = function() {
@@ -140,10 +142,10 @@ define(['jquery'], function($) {
 
     $.fn[pluginName] = function(options) {
         return this.each(function() {
-            if (!$.data(this, 'plugin_' + pluginName)) {
-                $.data(this, 'plugin_' + pluginName,
-                    new CheckboxBtn(this, options));
-            }
+            if ($.data(this, 'plugin_' + pluginName))
+                return;
+
+            $.data(this, 'plugin_' + pluginName, new CheckboxBtn(this, options));
         });
     };
-});
+}));
