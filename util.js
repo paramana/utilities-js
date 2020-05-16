@@ -1,7 +1,7 @@
 /*!
  * Version: 1.1
  * Started: 30-04-2013
- * Updated: 15-05-2020
+ * Updated: 16-05-2020
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -129,6 +129,16 @@
         },
 
         /*
+        * @type {string}
+        */
+        upperCaseFirst: function(str) {
+            if (!str)
+                return str;
+
+            return str.substr(0, 1).toUpperCase() + str.substr(1).toLowerCase().replace(/σ( +)|σ$/g, 'ς$1');
+        },
+
+        /*
          * Converts a string to seo friendly format
          * px: ALIKARHS-~-OLA-STA-KARBOYNA -> ALIKARHS-OLA-STA-KARBOYNA
          *
@@ -235,7 +245,7 @@
         getQuerySearchParam: function(){
             if (!history || !history.pushState)
                 return (location.hash.replace(/^#/, '') || '?').split('?')[1];
-    
+
             return window.location.search || '';
         },
 
