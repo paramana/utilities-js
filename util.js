@@ -504,10 +504,11 @@
          *     Possible values:
          *     true   may benefit
          *     false  can not benefit
+         * @param {String}  sameSite SameSite option
          *
          * @return {String} Returns a cookie name.
          */
-        setCookie: function(name, value, expire, path, domain, secure) {
+        setCookie: function(name, value, expire, path, domain, secure, sameSite) {
             var ck = name + '=' + escape(value) + ';';
 
             if (expire)
@@ -517,7 +518,9 @@
             if (domain)
                 ck += 'domain=' + domain + ';';
             if (secure)
-                ck += 'secure';
+                ck += 'secure;';
+
+            ck += 'samesite=' + (sameSite || 'strict') + ';';
 
             document.cookie = ck;
             return value;
