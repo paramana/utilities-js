@@ -1,7 +1,7 @@
 /*!
  * Version: 1.1
  * Started: 30-04-2013
- * Updated: 16-05-2020
+ * Updated: 08-10-2020
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -289,6 +289,16 @@
             }
 
             return obj;
+        },
+        dateRangeOverlaps: function(a_start, a_end, b_start, b_end) {
+            if (a_start <= b_start && b_start <= a_end)
+                return true;
+            if (a_start <= b_end   && b_end   <= a_end)
+                return true;
+            if (b_start <  a_start && a_end   <  b_end)
+                return true;
+
+            return false;
         },
         padDate: function(date) {
             if (!date)

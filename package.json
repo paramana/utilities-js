@@ -1,6 +1,6 @@
 {
   "name": "utilities",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "Common js utilities, functions and plugins used in our applications",
   "main": "utitlities.js",
   "scripts": {
