@@ -1,7 +1,7 @@
 /*!
- * Version: 1.0
+ * Version: 1.2
  * Started: 11-06-2013
- * Updated: 06-01-2019
+ * Updated: 11-11-2020
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -54,8 +54,11 @@ define(['jquery'], function($) {
         if (!this.enabled)
             return false;
 
-        var _value  = value || this.$select.prop('value'),
+        var _value  = value || this.$select.prop('value') || this.$select.data('value'),
             $option = this.$select.find('option[value="' + _value + '"]:eq(0)');
+
+        if (!this.$select.prop('value'))
+            this.$select.val(_value);
 
         if (!$option.length) {
             _value  = '';
