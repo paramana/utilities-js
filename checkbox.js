@@ -46,7 +46,7 @@
             _value    = this.$checkbox.val();
 
         if (dataValue && dataValue == _value)
-            this.$checkbox.attr('checked', 'checked');
+            this.$checkbox.prop('checked', true);
 
         this.toggleCheck();
         this.events();
@@ -117,7 +117,7 @@
                 var checked = _self.$checkbox.prop('checked');
 
                 _self.$checkbox
-                    .prop('checked', checked ? '' : 'checked')
+                    .prop('checked', checked ? false : true)
                     .trigger('change');
             }
         });
@@ -125,13 +125,13 @@
 
     CheckboxBtn.prototype.enable = function() {
         this.$element.removeClass('disabled');
-        this.$checkbox.removeAttr('disabled');
+        this.$checkbox.removeProp('disabled');
         this.enabled = true;
     };
 
     CheckboxBtn.prototype.disable = function() {
         this.$element.addClass('disabled');
-        this.$checkbox.attr('disabled', 'disabled');
+        this.$checkbox.prop('disabled', true);
         this.enabled = false;
     };
 
