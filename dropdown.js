@@ -42,7 +42,7 @@ define(['jquery'], function($) {
         this.events();
 
         if (this.options.value !== false && this.options.value !== '')
-            $selected = this.$select.find('option[value="' + this.options.value + '"]').attr('selected', 'selected');
+            $selected = this.$select.find('option[value="' + this.options.value + '"]').prop('selected', true);
         else
             $selected = this.$select.find('option[selected="selected"]');
 
@@ -81,7 +81,7 @@ define(['jquery'], function($) {
         }
         else {
             this.$element.addClass(this.options.selectedClass);
-            $option.attr('selected', 'selected');
+            $option.prop('selected', true);
         }
     };
 
@@ -121,13 +121,13 @@ define(['jquery'], function($) {
 
     Dropdown.prototype.enable = function() {
         this.$element.removeClass('disabled');
-        this.$select.removeAttr('disabled');
+        this.$select.removeProp('disabled');
         this.enabled = true;
     }
 
     Dropdown.prototype.disable = function() {
         this.$element.addClass('disabled');
-        this.$select.attr('disabled', 'disabled');
+        this.$select.prop('disabled', true);
         this.enabled = false;
     }
 
