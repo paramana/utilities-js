@@ -121,7 +121,7 @@ define(['jquery'], function($) {
 
     Dropdown.prototype.enable = function() {
         this.$element.removeClass('disabled');
-        this.$select.removeProp('disabled');
+        this.$select.prop('disabled', false);
         this.enabled = true;
     }
 

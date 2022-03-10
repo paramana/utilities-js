@@ -125,7 +125,7 @@
 
     CheckboxBtn.prototype.enable = function() {
         this.$element.removeClass('disabled');
-        this.$checkbox.removeProp('disabled');
+        this.$checkbox.prop('disabled', false);
         this.enabled = true;
     };
 

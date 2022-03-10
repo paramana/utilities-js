@@ -139,13 +139,13 @@
 
     RadioBtn.prototype.enable = function() {
         this.$element.removeClass('disabled');
-        this.$radio.removeAttr('disabled');
+        this.$radio.prop('disabled', false);
         this.enabled = true;
     };
 
     RadioBtn.prototype.disable = function() {
         this.$element.addClass('disabled');
-        this.$radio.attr('disabled', 'disabled');
+        this.$radio.prop('disabled', true);
         this.enabled = false;
     };
 
