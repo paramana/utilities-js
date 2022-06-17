@@ -1,7 +1,7 @@
 /*!
  * Version: 1.1
  * Started: 30-04-2013
- * Updated: 08-10-2020
+ * Updated: 17-06-2022
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -405,6 +405,26 @@
             }
 
             return Math.floor(Math.abs(age));
+        },
+        getDaysBetween: function(d1, d2, beginningOfDay){
+            if (!d1)
+                return 0;
+
+            d1 = new Date(d1);
+
+            if (!d2)
+                d2 = new Date();
+
+            if (beginningOfDay) {
+                d1.setHours(0, 0, 0, 0);
+                d2.setHours(0, 0, 0, 0);
+            }
+            else {
+                d1.setHours(23, 59, 59);
+                d2.setHours(23, 59, 59);
+            }
+
+            return Math.ceil((d1.getTime() - d2.getTime()) / (1000 * 3600 * 24));
         },
         isItNow: function(date) {
             date = date + '';
