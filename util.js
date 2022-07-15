@@ -314,13 +314,13 @@
                 this.padDate(date.getUTCDate()) + ' ' + this.padDate(date.getUTCHours()) + ':' +
                 this.padDate(date.getUTCMinutes()) + ':' + this.padDate(date.getUTCSeconds());
         },
-        dateSQLToJS: function(date) {
+        dateSQLToJS: function(date, withTZ) {
             if (!date)
                 return date;
 
             // Split timestamp into [ Y, M, D, h, m, s ]
             var t = date.split(/[- :T]/),
-                z = 'Z',
+                z = withTZ ? 'Z' : '',
                 s;
 
             if (t[5]) {
