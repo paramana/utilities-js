@@ -45,7 +45,7 @@
         var dataValue = this.$element.data('value'),
             _value    = this.$checkbox.val();
 
-        if (dataValue && dataValue == _value)
+        if (dataValue && dataValue == _value && this.$checkbox.prop('checked') !== false)
             this.$checkbox.prop('checked', true);
 
         this.toggleCheck();
