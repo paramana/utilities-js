@@ -33,10 +33,10 @@ define(['jquery'], function($) {
     }
 
     Dropdown.prototype.init = function() {
-        var $selected;
-
         if (this.$element.hasClass('dropdown-element'))
             return;
+
+        var $selected;
 
         this.$element.addClass('dropdown-element');
         this.events();

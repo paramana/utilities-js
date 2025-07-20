@@ -46,6 +46,9 @@
     }
 
     RadioBtn.prototype.init = function() {
+        if (this.$element.hasClass('radio-element'))
+            return;
+
         this.$element.addClass('radio-element');
 
         var dataValue = this.$element.data('value'),

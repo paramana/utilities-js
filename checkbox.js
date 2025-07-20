@@ -40,6 +40,9 @@
     }
 
     CheckboxBtn.prototype.init = function() {
+        if (this.$element.hasClass('checkbox-element'))
+            return;
+
         this.$element.addClass('checkbox-element');
 
         var dataValue = this.$element.data('value'),
