@@ -1,7 +1,7 @@
 /*!
  * Version: 1.0
  * Started: 07-02-2014
- * Updated: 15-05-2020
+ * Updated: 15-10-2025
  * Author : paramana (hello AT paramana DOT com)
  *
  */
@@ -48,7 +48,7 @@
         var dataValue = this.$element.data('value'),
             _value    = this.$checkbox.val();
 
-        if (dataValue && dataValue == _value && this.$checkbox.prop('checked') !== false)
+        if (dataValue && dataValue == _value && this.$checkbox.prop('checked') == false)
             this.$checkbox.prop('checked', true);
 
         this.toggleCheck();
